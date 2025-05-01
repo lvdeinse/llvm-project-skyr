@@ -675,3 +675,12 @@ def ANDES_AX45 : RISCVProcessorModel<"andes-ax45",
                                       FeatureStdExtD,
                                       FeatureStdExtC,
                                       FeatureStdExtB]>;
+
+def SkymionAND : RISCVProcessorModel<"skyrmion",
+                                        NoSchedModel,
+                                       [Feature64Bit,
+                                        FeatureStdExtD,
+                                        FeatureStdExtI,
+                                        FeatureSkyrmionAND],
+                                       GenericTuneFeatures>,
+                   GenericTuneInfo;

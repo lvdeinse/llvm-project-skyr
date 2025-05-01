@@ -1194,6 +1194,14 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
 
     break;
   case ISD::AND: {
+    if (Subtarget->hasSkyrmions()) {
+      SDValue Op1 = Node->getOperand(0);
+      SDValue Op2 = Node->getOperand(1);
+
+      ReplaceNode(Node, CurDAG->getMachineNode(RISCV::SKYR_AND, DL, VT, Op1, Op2));
+      return;
+    }
+    
     auto *N1C = dyn_cast<ConstantSDNode>(Node->getOperand(1));
     if (!N1C)
       break;

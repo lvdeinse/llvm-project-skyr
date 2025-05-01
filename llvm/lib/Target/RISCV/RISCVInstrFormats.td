@@ -461,6 +461,15 @@ class RVInstIUnary<bits<12> imm12, bits<3> funct3, RISCVOpcode opcode,
   let Inst{31-20} = imm12;
 }
 
+class RVInstMem<bits<7> funct7, bits<3> funct3, RISCVOpcode opcode, dag outs, dag ins,
+                    string opcodestr, string argstr>
+    : RVInstIBase<funct3, opcode, outs, ins, opcodestr, argstr> {
+  bits<5> rs2;
+  
+  let Inst{31-25} = funct7;
+  let Inst{24-20} = rs2;
+}
+
 class RVInstS<bits<3> funct3, RISCVOpcode opcode, dag outs, dag ins,
               string opcodestr, string argstr>
     : RVInst<outs, ins, opcodestr, argstr, [], InstFormatS> {

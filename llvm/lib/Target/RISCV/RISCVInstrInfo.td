@@ -727,6 +727,11 @@ def OR   : ALU_rr<0b0000000, 0b110, "or", Commutable=1>,
 def AND  : ALU_rr<0b0000000, 0b111, "and", Commutable=1>,
            Sched<[WriteIALU, ReadIALU, ReadIALU]>;
 
+let hasSideEffects = 0, mayLoad = 0, mayStore = 0 in {
+  def SKYR_AND  : RVInstMem<0b0000111, 0b100, OPC_OP ,(outs GPR:$rd), (ins GPR:$rs1, GPR:$rs2),
+                  "skyr_and", "$rd, $rs2">;
+}
+
 let hasSideEffects = 1, mayLoad = 0, mayStore = 0 in {
 def FENCE : RVInstI<0b000, OPC_MISC_MEM, (outs),
                     (ins fencearg:$pred, fencearg:$succ),
